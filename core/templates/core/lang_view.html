@@ -1,0 +1,99 @@
+{% include 'core/navbar.html' %}
+{% load static %}
+
+<div style="padding-top: 10%; margin-left: 10%; margin-right: 10%;">
+    <div>
+        <div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr style="color: white;">
+                            <th>Languages</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: white;">
+                        <input type="hidden" value={{request.user.cv.id}} id="cv_id">
+
+                        {% if user_lang %}
+                        {% for l in user_lang %}
+
+                        <tr>
+
+
+                            <td>
+                                {{ l.lang_name }}
+                            </td>
+
+                            <td>
+                                <input class="btn btn-primary btn-sm btn-edit" style="width: 70px;" data-id="{{l.id}}"
+                                    value="Edit" type="button">
+                            </td>
+
+                            <td>
+                                <input class="btn btn-danger btn-sm btn-delete" style="width: 70px;" data-id="{{l.id}}"
+                                    value="Delete" type="button">
+                            </td>
+                        </tr>
+
+
+                        {% endfor %}
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="save_lang_status"></div>
+
+
+
+            <br />
+            <br />
+
+
+
+            <div class="update_lang_info" style="display: none;">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead style="color: white;">
+                            <tr>
+                                <th>Languages</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <input type="hidden" id="lang_id">
+
+
+                            <tr>
+
+                                <td>
+                                    <input type="text" id="lang_name" class="form-control" />
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <button class="btn btn-success" id="save_lang">Update</button>
+
+                    <button class="btn btn-info" id="close_lang">Close</button>
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    {% include 'core/edit_cv_script.html' %}

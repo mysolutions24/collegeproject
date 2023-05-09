@@ -1,0 +1,1232 @@
+<script>
+    $(document).ready(function () {
+
+
+        $('#profile_save').click(function (e) {
+            e.preventDefault();
+
+
+            var fname = $('.uform #fname').val();
+            var lname = $('.uform #lname').val();
+            var mname = $('.uform #mname').val();
+            var gender = $('.uform #gender').val();
+            var country = $('.uform #country').val();
+            var region = $('.uform #region').val();
+            var city = $('.uform #city').val();
+            // var pincode= $('.uform #pincode').val();
+            var email = $('.uform #email').val();
+            var phone = $('.uform #phone').val();
+            var occupation = $('.uform #occupation').val();
+            var dob = $('.uform #dob').val();
+            var bio = $('.uform #bio').val();
+
+            var data = new FormData();
+            data.append('file', $("input[id^='file']")[0].files[0])
+            data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+            data.append('fname', fname);
+            data.append('lname', lname);
+            data.append('mname', mname);
+            data.append('gender', gender);
+            data.append('country', country);
+            data.append('region', region);
+            data.append('city', city);
+            // data.append('pincode', pincode);
+            data.append('email', email);
+            data.append('phone', phone);
+            data.append('occupation', occupation);
+            data.append('dob', dob);
+            data.append('bio', bio);
+
+
+            $.ajax({
+                url: "{% url 'profile-save' %}",
+                method: "POST",
+                processData: false,
+                contentType: false,
+                mimeType: "multipart/form-data",
+                data: data,
+                dataType: 'json',
+
+                beforeSend: function () {
+                    $('#loading_spinner').show();
+                    $(":input").prop("disable", true);
+                },
+
+                complete: function () {
+                    $('#loading_spinner').hide();
+                    $(":input").prop("disable", false);
+                },
+
+                success: function (data) {
+                    $('.uform')[0].reset();
+                    $('#result').html('');
+                    $('#result').append('Profile Saved Successfully');
+
+
+                }
+            })
+
+
+
+
+
+
+
+        });
+
+
+
+
+        //$('#skill_save').hide();
+        $('#edu_save').hide();
+        $('#exp_save').hide();
+        $('#ref_save').hide();
+        $('#hobby_save').hide();
+        $('#lang_save').hide();
+        $('#eca_save').hide();
+
+
+
+
+
+
+
+
+        // Value for skill form
+        var a = 0
+
+        // Value for Education form
+        var b = 0
+
+
+        // Value for referee form
+        var c = 0
+
+        //Value for Experiance form
+        var d = 0
+
+        //Value for link form
+        var f = 0
+
+        //Value for hobby form
+        var g = 0
+
+        //Value for lang form
+        var h = 0
+
+        //Value for eca form
+        var i = 0
+
+
+
+        // Incriment skill form
+        $('#skill_add').click(function (e) {
+            e.preventDefault();
+            appendSkillRow();
+            a++;
+            $('#skill_save').show();
+        });
+
+
+        // Incriment education form
+        $('#edu_add').click(function (e) {
+            e.preventDefault();
+            appendEduRow();
+            b++;
+            $('#edu_save').show();
+        });
+
+
+
+        // Incriment Referee form
+        $('#ref_add').click(function (e) {
+            e.preventDefault();
+            appendRefRow();
+            c++;
+            $('#ref_save').show();
+        });
+
+
+        // Incriment Experiance form
+        $('#exp_add').click(function (e) {
+            e.preventDefault();
+            appendExpRow();
+            d++;
+            $('#exp_save').show();
+        });
+
+
+        // Incriment link form
+        $('#link_add').click(function (e) {
+            e.preventDefault();
+            appendLinkRow();
+            f++;
+            $('#link_save').show();
+        });
+
+        // Incriment hobbies form
+        $('#hobby_add').click(function (e) {
+            e.preventDefault();
+            appendHobbyRow();
+            g++;
+            $('#hobby_save').show();
+        });
+
+        // Incriment lang form
+        $('#lang_add').click(function (e) {
+            e.preventDefault();
+            appendLangRow();
+            h++;
+            $('#lang_save').show();
+        });
+
+        // Incriment eca form
+        $('#eca_add').click(function (e) {
+            e.preventDefault();
+            appendEcaRow();
+            i++;
+            $('#eca_save').show();
+        });
+
+
+
+        // Append eca form
+        function appendEcaRow() {
+            $('#wrapper_eca').append(
+
+
+                '<div class="form-group" id="' + i + '">' +
+                '<div class="col" id="' + i + '">' +
+                '<div class="col" id="' + i + '">' +
+                '<label>Title</label>' +
+                '<input id="' + i + '" type="title" name="eca_name" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + i + '">' +
+                '<label>Description</label>' +
+                '<textarea id="des" name="des" placeholder="EX: Frist Class Degree etc..."cols="4" rows="5" class="form-control"></textarea>' +
+                '</div>' +
+                '<div class="eca_del_btn col" id="' + i + '">' +
+                '<button class=" btn btn-danger ">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+
+
+
+        // Append lang form
+        function appendLangRow() {
+            $('#wrapper_lang').append(
+                '<div id="' + h + '" class="form-group">' +
+                '<div class="col" id="' + h + '" >' +
+                '<div class="col" id="' + h + '">' +
+                '<label>familier languages</label>' +
+                '<input type="lang_name" name="lang_name" class="form-control" />' +
+                '</div>' +
+                '<div id="' + h + '" class="lang_del_btn col">' +
+                '<button class=" btn btn-danger style="margin-top:10px;">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+
+
+        // Append hobbies form
+        function appendHobbyRow() {
+            $('#wrapper_hobby').append(
+                '<div id="' + g + '" class="form-group">' +
+                '<div class="col" id="' + g + '" >' +
+                '<div class="col" id="' + g + '">' +
+                '<label>What is your hobby?</label>' +
+                '<input type="text" name="hobby_name" class="form-control" />' +
+                '</div>' +
+                '<div id="' + g + '" class="hobby_del_btn col">' +
+                '<button class=" btn btn-danger style="margin-top:10px;">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+
+
+        // Append links form
+        function appendLinkRow() {
+            $('#wrapper_link').append(
+                '<div id="' + f + '" class="form-group">' +
+                '<div class="col" id="' + f + '" >' +
+                '<div class="col" id="' + f + '">' +
+                '<label>Name</label>' +
+                '<input type="link_name" name="link_name" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + f + '">' +
+                '<label>Link</label>' +
+                '<input type="link" name="link" class="form-control" />' +
+                '</div>' +
+                '<div id="' + f + '" class="link_del_btn col">' +
+                '<button class=" btn btn-danger style="margin-top:10px;">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+        // Append references form
+        function appendRefRow() {
+            $('#wrapper_ref').append(
+                '<div id="' + c + '" class="form-group">' +
+                '<div class="col" id="' + c + '" >' +
+                '<div class="col" id="' + c + '">' +
+                '<label>Name</label>' +
+                '<input type="Enter Referee Name" name="name" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + c + '">' +
+                '<label>Mobile Number</label>' +
+                '<input type="Enter Referee Phone Number" name="phone" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + c + '">' +
+                '<label>Email ID</label>' +
+                '<input type="Enter Referee Email" name="email" class="form-control" />' +
+                '</div>' +
+                '<div id="' + c + '" class="ref_del_btn col">' +
+                '<button class=" btn btn-danger style="margin-top:10px;">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+
+
+
+        // Append skill form
+        function appendSkillRow() {
+            $('#wrapper_skill').append(
+
+
+                '<div class="form-group" id="' + a + '">' +
+                '<div class="row" id="' + a + '">' +
+                '<div class="col" id="' + a + '">' +
+                '<label>Name of your skill</label>' +
+                '<input id="' + a + '" type="Enter Your Skill" name="s_name" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + a + '">' +
+                '<label>Level of your skill</label>' +
+                '<select  id="' + a + '" name="s_level" class="form-control">' +
+                '<option value="">Choose Your Level</option>' +
+                '<option value="Beginner">Beginner</option>' +
+                '<option value="Intermediate">Intermediate</option>' +
+                '<option value="Advanced">Advanced</option>' +
+                '</select>' +
+                '</div>' +
+
+                '<div class="skill_del_btn col" id="' + a + '">' +
+                '<button class=" btn btn-danger ">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+
+
+        // Append education form
+        function appendEduRow() {
+            $('#wrapper_edu').append(
+                '<div id="' + b + '" class="form-group">' +
+                '<div class="col" id="' + b + '" >' +
+                '<div class="col" id="' + b + '">' +
+                '<label>Institution Name</label>' +
+                '<input type="Enter Institution Name" name="name" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + b + '">' +
+                '<label>Course Name</label>' +
+                '<input type="course" placeholder="EX: BCA Compuert Applications" name="course" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + b + '">' +
+                '<label>Year Of Passing</label>' +
+                '<input type="Enter Year" name="year" placeholder="EX: 2020-2023" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + b + '">' +
+                '<label>Obtained Marks In Percentage (%)</label>' +
+                '<input type="mark" name="mark" class="form-control" />' +
+                '</div>' +
+                '<div class="col" id="' + d + '">' +
+                '<label>Discription</label>' +
+                '<textarea name="award" placeholder="EX: Frist Class Degree etc..."cols="4" rows="5" class="form-control"></textarea>' +
+                '</div>' +
+                '<div id="' + b + '" class="edu_del_btn col">' +
+                '<button class=" btn btn-danger"  style="margin-top:10px;">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+        //append experiance form
+        function appendExpRow() {
+            $('#wrapper_exp').append(
+                '<div id="' + d + '" class="form-group">' +
+                '<div class="col" id="' + d + '" >' +
+
+
+                '<div class="col" id="' + d + '">' +
+                '<label>Company</label>' +
+                '<input type="company" name="company" id="company" class="form-control" />' +
+                '</div>' +
+
+
+                '<div class="col" id="' + d + '">' +
+                '<label>Job Title</label>' +
+                '<input type="Role" name="role" id="role" class="form-control" />' +
+                '</div>' +
+
+
+                '<div class="col" id="' + d + '">' +
+                '<label>Duration</label>' +
+                '<input type="Working Duration" name="duration" id="duration" class="form-control" />' +
+                '</div>' +
+
+                '<div class="col" id="' + d + '">' +
+                '<label>City</label>' +
+                '<input type="City" name="city" id="city" class="form-control" />' +
+                '</div>' +
+
+                '<div class="col" id="' + d + '">' +
+                '<label>Discription</label>' +
+                '<textarea name="bio" placeholder="Highly skilled and experienced Translator with a strong background in translating Legal Documents in English."cols="4" rows="5" class="form-control"></textarea>' +
+                '</div>' +
+
+
+                '<div id="' + d + '" class="exp_del_btn col">' +
+                '<button class=" btn btn-danger" style="margin-top:5px;">Delete</button>' +
+                '</div>' +
+                '</div>' +
+                '</div>'
+
+            );
+        }
+
+
+        // lang delete form 
+        $('#wrapper_eca').on('click', '.eca_del_btn', function (e) {
+            e.preventDefault();
+            var r_id = e.currentTarget.id;
+            $('div[id=' + r_id + ']').remove()
+            i--;
+
+            if (c === 0) {
+                $('#eca_save').hide();
+            }
+
+        });
+
+
+
+        // lang delete form 
+        $('#wrapper_lang').on('click', '.lang_del_btn', function (e) {
+            e.preventDefault();
+            var r_id = e.currentTarget.id;
+            $('div[id=' + r_id + ']').remove()
+            h--;
+
+            if (c === 0) {
+                $('#lang_save').hide();
+            }
+
+        });
+
+
+        // hobby delete form 
+        $('#wrapper_hobby').on('click', '.hobby_del_btn', function (e) {
+            e.preventDefault();
+            var r_id = e.currentTarget.id;
+            $('div[id=' + r_id + ']').remove()
+            g--;
+
+            if (c === 0) {
+                $('#hobby_save').hide();
+            }
+
+        });
+
+
+
+        // link delete form 
+        $('#wrapper_link').on('click', '.link_del_btn', function (e) {
+            e.preventDefault();
+            var r_id = e.currentTarget.id;
+            $('div[id=' + r_id + ']').remove()
+            f--;
+
+            if (c === 0) {
+                $('#link_save').hide();
+            }
+
+        });
+
+
+        // Referee delete form 
+        $('#wrapper_ref').on('click', '.ref_del_btn', function (e) {
+            e.preventDefault();
+            var r_id = e.currentTarget.id;
+            $('div[id=' + r_id + ']').remove()
+            c--;
+
+            if (c === 0) {
+                $('#ref_save').hide();
+            }
+
+        });
+
+
+
+        // Skill delete form 
+        $('#wrapper_skill').on('click', '.skill_del_btn', function (e) {
+            e.preventDefault();
+            var s_id = e.currentTarget.id;
+            $('div[id=' + s_id + ']').remove()
+            a--;
+
+            if (a === 0) {
+                //$('#skill_save').hide();
+            }
+
+        });
+
+
+
+
+        // Education delete form 
+        $('#wrapper_edu').on('click', '.edu_del_btn', function (e) {
+            e.preventDefault();
+            var e_id = e.currentTarget.id;
+            $('div[id=' + e_id + ']').remove()
+            b--;
+
+            if (a === 0) {
+                $('#edu_save').hide();
+            }
+
+
+        });
+        // Experiance delete form 
+        $('#wrapper_exp').on('click', '.exp_del_btn', function (e) {
+            e.preventDefault();
+            var e_id = e.currentTarget.id;
+            $('div[id=' + e_id + ']').remove()
+            d--;
+
+            if (a === 0) {
+                $('#exp_save').hide();
+            }
+        });
+
+
+
+
+
+        $.fn.serializeObject = function (asString) {
+            var o = {}
+            var a = this.serializeArray();
+            $.each(a, function () {
+                if ($('#' + this.name).hasClass('date')) {
+                    this.value = new Date(this.value).setHours(12)
+                }
+
+                if (o[this.name] !== undefined) {
+                    if (!o[this.name].push) {
+                        o[this.name] = [o[this.name]]
+                    }
+                    o[this.name].push(this.value || '')
+                } else {
+                    o[this.name] = this.value || '';
+                }
+
+            });
+            if (asString) {
+                return JSON.stringify(o)
+            }
+            return o;
+        }
+
+
+        // Save skills
+        $('#skill_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_skill').serializeObject()
+
+            var obj;
+
+            var nameArray = []
+            var levelArray = []
+
+            if (Array.isArray(formData.s_name)) {
+                for (var i = 0; i < formData.s_name.length; i++) {
+                    obj = {}
+                    obj.s_name = formData.s_name[i]
+                    obj.s_level = formData.s_level[i]
+
+                    nameArray.push(formData.s_name[i])
+                    levelArray.push(formData.s_level[i])
+
+
+                }
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "skill-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 's_name': nameArray, 's_level': levelArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Skill Data Saved')
+                        } else {
+                            alert('Multiple Skill Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+                obj.s_name = formData.s_name
+                obj.s_level = formData.s_level
+
+                nameArray.push(formData.s_name)
+                levelArray.push(formData.s_level)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "skill-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 's_name': nameArray, 's_level': levelArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Skill Data Saved')
+                        } else {
+                            alert('Single Skill Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+
+
+
+
+        // Save referee
+        $('#ref_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_ref').serializeObject()
+
+            var obj;
+
+            var nameArray = []
+            var phoneArray = []
+            var emailArray = []
+
+
+            if (Array.isArray(formData.name)) {
+                for (var i = 0; i < formData.name.length; i++) {
+                    obj = {}
+                    obj.name = formData.name[i]
+                    obj.phone = formData.phone[i]
+                    obj.email = formData.email[i]
+
+
+                    nameArray.push(formData.name[i])
+                    phoneArray.push(formData.phone[i])
+                    emailArray.push(formData.email[i])
+
+                    console.log('Name', nameArray)
+                    console.log('Phone', phoneArray)
+                    console.log('Email', emailArray)
+
+
+
+
+                }
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "ref-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'name': nameArray, 'phone': phoneArray, 'email': emailArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Referee Data Saved')
+                        } else {
+                            alert('Multiple Referee Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+                obj.name = formData.name
+                obj.phone = formData.phone
+                obj.email = formData.email
+
+
+                nameArray.push(formData.name)
+                phoneArray.push(formData.phone)
+                emailArray.push(formData.email)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "ref-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'name': nameArray, 'phone': phoneArray, 'email': emailArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Referee Data Saved')
+                        } else {
+                            alert('Single Referee Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+        // Save link
+        $('#link_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_link').serializeObject()
+
+            var obj;
+
+            var link_nameArray = []
+            var linkArray = []
+
+
+            if (Array.isArray(formData.link_name)) {
+                for (var i = 0; i < formData.link_name.length; i++) {
+                    obj = {}
+                    obj.link_name = formData.link_name[i]
+                    obj.link = formData.link[i]
+
+
+                    link_nameArray.push(formData.link_name[i])
+                    linkArray.push(formData.link[i])
+
+                    console.log('link_name', link_nameArray)
+                    console.log('link', linkArray)
+
+
+
+
+                }
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "link-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'link_name': link_nameArray, 'link': linkArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Social Data Saved')
+                        } else {
+                            alert('Multiple Social Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+                obj.link_name = formData.link_name
+                obj.link = formData.link
+
+
+                link_nameArray.push(formData.link_name)
+                linkArray.push(formData.link)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "link-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'link_name': link_nameArray, 'link': linkArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Social Link Data Saved')
+                        } else {
+                            alert('Single Social Link Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+
+
+        // Save hobby
+        $('#hobby_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_hobby').serializeObject()
+
+            var obj;
+
+            var hobby_nameArray = []
+
+
+            if (Array.isArray(formData.hobby_name)) {
+                for (var i = 0; i < formData.hobby_name.length; i++) {
+                    obj = {}
+                    obj.hobby_name = formData.hobby_name[i]
+
+
+                    hobby_nameArray.push(formData.hobby_name[i])
+                    console.log('hobby_name', hobby_nameArray)
+
+
+
+
+                }
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "hobby-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'hobby_name': hobby_nameArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Hobby Data Saved')
+                        } else {
+                            alert('Multiple Hobby Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+                obj.hobby_name = formData.hobby_name
+
+
+                hobby_nameArray.push(formData.hobby_name)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "hobby-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'hobby_name': hobby_nameArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Hobby Link Data Saved')
+                        } else {
+                            alert('Single Hobby Link Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+
+        // Save lang
+        $('#lang_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_lang').serializeObject()
+
+            var obj;
+
+            var lang_nameArray = []
+
+
+            if (Array.isArray(formData.lang_name)) {
+                for (var i = 0; i < formData.lang_name.length; i++) {
+                    obj = {}
+                    obj.lang_name = formData.lang_name[i]
+
+
+                    lang_nameArray.push(formData.lang_name[i])
+
+                    console.log('lang_name', lang_nameArray)
+
+
+
+
+                }
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "lang-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'lang_name': lang_nameArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple language Data Saved')
+                        } else {
+                            alert('Multiple language Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+                obj.lang_name = formData.lang_name
+
+
+                lang_nameArray.push(formData.lang_name)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "lang-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'lang_name': lang_nameArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Language Link Data Saved')
+                        } else {
+                            alert('Single Language Link Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+
+        // Save eca
+        $('#eca_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_eca').serializeObject()
+
+            var obj;
+
+            var titleArray = []
+            var desArray = []
+
+
+            if (Array.isArray(formData.name)) {
+                for (var i = 0; i < formData.name.length; i++) {
+                    obj = {}
+                    obj.eca_name = formData.eca_name[i]
+                    obj.des = formData.des[i]
+
+
+                    titleArray.push(formData.eca_name[i])
+                    desArray.push(formData.des[i])
+
+                    console.log('title name', titleArray)
+
+                }
+
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "eca-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'eca_name': titleArray, 'des': desArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Data Saved')
+                        } else {
+                            alert('Multiple Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+
+                obj.eca_name = formData.eca_name
+                obj.des = formData.des
+
+                titleArray.push(formData.eca_name)
+                desArray.push(formData.des)
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "eca-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'eca_name': titleArray, 'des': desArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Data Saved')
+                        } else {
+                            alert('Single Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+
+
+
+        // Save education
+        $('#edu_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_edu').serializeObject()
+
+            var obj;
+
+            var nameArray = []
+            var yearArray = []
+            var awardArray = []
+            var courseArray = []
+            var markArray = []
+
+
+            if (Array.isArray(formData.name)) {
+                for (var i = 0; i < formData.name.length; i++) {
+                    obj = {}
+                    obj.name = formData.name[i]
+                    obj.year = formData.year[i]
+                    obj.award = formData.award[i]
+                    obj.course = formData.course[i]
+                    obj.mark = formData.mark[i]
+
+
+                    nameArray.push(formData.name[i])
+                    yearArray.push(formData.year[i])
+                    awardArray.push(formData.award[i])
+                    courseArray.push(formData.course[i])
+                    markArray.push(formData.mark[i])
+
+
+                    console.log('Institution name', nameArray)
+
+                }
+
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "edu-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'name': nameArray, 'year': yearArray, 'award': awardArray, 'course': courseArray, 'mark':markArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Education Data Saved')
+                        } else {
+                            alert('Multiple Education Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+
+                obj.name = formData.name
+                obj.year = formData.year
+                obj.award = formData.award
+                obj.course = formData.course
+                obj.mark = formData.mark
+
+
+
+                nameArray.push(formData.name)
+                yearArray.push(formData.year)
+                awardArray.push(formData.award)
+                courseArray.push(formData.course)
+                markArray.push(formData.mark)
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "edu-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'name': nameArray, 'year': yearArray, 'award': awardArray, 'course': courseArray, 'mark':markArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Education Data Saved')
+                        } else {
+                            alert('Single Education Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+        // Save Experiance
+        $('#exp_save').click(function (e) {
+            e.preventDefault();
+            var formData = $('.form_exp').serializeObject()
+
+            var obj;
+
+            var companyArray = []
+            var roleArray = []
+            var durationArray = []
+            var cityArray = []
+            var bioArray = []
+
+
+            if (Array.isArray(formData.company)) {
+                for (var i = 0; i < formData.company.length; i++) {
+                    obj = {}
+                    obj.company = formData.company[i]
+                    obj.role = formData.role[i]
+                    obj.duration = formData.duration[i]
+                    obj.city = formData.city[i]
+                    obj.bio = formData.bio[i]
+
+                    companyArray.push(formData.company[i])
+                    roleArray.push(formData.role[i])
+                    durationArray.push(formData.duration[i])
+                    cityArray.push(formData.city[i])
+                    bioArray.push(formData.bio[i])
+
+
+                    console.log('Company', companyArray)
+
+                }
+
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "exp-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'company': companyArray, 'role': roleArray, 'duration': durationArray, 'city': cityArray, 'bio': bioArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Multiple Experiance Data Saved')
+                        } else {
+                            alert('Multiple Experiance Data Not Saved')
+                        }
+                    }
+
+                })
+
+
+            } else {
+                obj = {}
+                obj.company = formData.company
+                obj.role = formData.role
+                obj.duration = formData.duration
+                obj.city = formData.city
+                obj.bio = formData.bio
+
+                companyArray.push(formData.company)
+                roleArray.push(formData.role)
+                durationArray.push(formData.duration)
+                cityArray.push(formData.city)
+                bioArray.push(formData.bio)
+
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{% url "exp-save" %}',
+                    headers: { 'X-CSRFToken': '{{csrf_token}}' },
+                    data: { 'company': companyArray, 'role': roleArray, 'duration': durationArray, 'city': cityArray, 'bio': bioArray },
+
+                    success: function (data) {
+                        x = data.status
+                        if (x == 1) {
+                            alert('Single Experiance Data Saved')
+                        } else {
+                            alert('Single Experiance Data Not Saved')
+                        }
+                    }
+
+                })
+
+            }
+
+
+        });
+
+
+    });
+</script>

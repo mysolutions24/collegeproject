@@ -1,0 +1,75 @@
+{% include 'core/navbar.html' %}
+{% load static %}
+<style>
+        button {
+       
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-shadow: 0 0 10px black;
+        cursor: pointer;
+        transition: .5s;
+        margin-top: 20px;
+        color: white;
+        background-color: blue;
+        border-radius: 10px;
+        box-shadow: 50px;
+        margin-right: 15px;
+    }
+button:hover{
+    background-color: rgb(0, 44, 165);
+    box-shadow: 0 0 20px black;
+}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+
+<center>
+
+<div>
+    <div>
+        <div>
+            <div style="
+                background-color: red; background-image: linear-gradient(0deg, rgb(255, 0, 234), rgb(255, 255, 47));">
+
+                <div style="height: 100%;">
+
+
+                    <h1 class="font-effect-neon" style="font-family:Sofia, sans-serif; padding-top: 200px;">Welcome Back To Your Dashboard! </h1>
+
+                    <p style="color:rgb(0, 0, 0); font-size: 30px; text-shadow: 3px 3px 3px #ababab;">It's a Time to create a wonderfull resume! </p>
+
+                    {% if status == 'there_is_cv' %}
+                    <a href="{% url 'createcv' %}">
+                        <button style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); height: 40px; width: 110px; border-radius: 50%;">Create</button>
+                    </a>
+
+<!-- correction -->
+                    <a href="{% url 's-t'  id=request.user.cv.id %}">
+                        <button style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); height: 40px; width: 110px; border-radius: 50%;">View</button>
+                    </a>
+
+                    <a href="{% url 'cv-edit' %}">
+                        <button style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); height: 40px; width: 110px; border-radius: 50%;">Edit</button>
+                    </a>
+
+
+                    {% else %}
+                    <a href="{% url 'createcv' %}">
+                        <button style="color: rgb(255, 255, 255); background-color: rgb(0, 0, 0); height: 40px; width: 110px; border-radius: 50%;">Start Now</button>
+                    </a>
+
+                    {% endif %}
+
+
+                    <br />
+                    <br />
+                    <br />
+
+                    {% include 'core/footer.html' %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</center>

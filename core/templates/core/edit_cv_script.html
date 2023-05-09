@@ -1,0 +1,1001 @@
+<script>
+    $(document).ready(function () {
+
+        //---------------
+        //REFERREAL BLOCK 
+        //---------------
+
+        $('#close_ref').click(function (e) {
+            e.preventDefault()
+            $('.update_ref_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('ref ID is', id)
+
+
+            $('#ref_id').val(id)
+
+            $('.update_ref_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchref' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#r_name').val(data.r_name);
+                    $('#r_email').val(data.r_email);
+                    $('#r_phone').val(data.r_phone);
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_ref').click(function (e) {
+            e.preventDefault()
+            let id = $('#ref_id').val()
+
+            console.log('Save ref ID is', id)
+
+            $('.update_ref_info').show()
+            let r_name = $('#r_name').val()
+            let r_email = $('#r_email').val()
+            let r_phone = $('#r_phone').val()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', r_name: r_name, r_email:r_email, r_phone:r_phone }
+
+
+            $.ajax({
+                url: "{% url 'update_ref' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_ref_status').html('');
+                    $('.update_ref_info').hide()
+                    $('#save_ref_status').append('referral Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('ref ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_ref' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_ref_status').html('');
+                    $('#save_ref_status').append('referral Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+        //---------------
+        //ECA BLOCK 
+        //---------------
+
+        $('#close_eca').click(function (e) {
+            e.preventDefault()
+            $('.update_eca_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('eca ID is', id)
+
+
+            $('#eca_id').val(id)
+
+            $('.update_eca_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetcheca' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#eca_name').val(data.eca_name);
+                    $('#eca_des').val(data.eca_des);
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_eca').click(function (e) {
+            e.preventDefault()
+            let id = $('#eca_id').val()
+
+            console.log('Save eca ID is', id)
+
+            $('.update_eca_info').show()
+            let eca_name = $('#eca_name').val()
+            let eca_des = $('#eca_des').val()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', eca_name: eca_name, eca_des:eca_des }
+
+
+            $.ajax({
+                url: "{% url 'update_eca' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_eca_status').html('');
+                    $('.update_eca_info').hide()
+                    $('#save_eca_status').append('curricular Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('eca ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_eca' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_eca_status').html('');
+                    $('#save_eca_status').append('curricular Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+        //---------------
+        //LANG BLOCK 
+        //---------------
+
+        $('#close_lang').click(function (e) {
+            e.preventDefault()
+            $('.update_lang_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('lang ID is', id)
+
+
+            $('#lang_id').val(id)
+
+            $('.update_lang_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchlang' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#lang_name').val(data.lang_name);
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_lang').click(function (e) {
+            e.preventDefault()
+            let id = $('#lang_id').val()
+
+            console.log('Save lang ID is', id)
+
+            $('.update_lang_info').show()
+            let lang_name = $('#lang_name').val()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', lang_name: lang_name }
+
+
+            $.ajax({
+                url: "{% url 'update_lang' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_lang_status').html('');
+                    $('.update_lang_info').hide()
+                    $('#save_lang_status').append('language Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('language ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_lang' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_lang_status').html('');
+                    $('#save_lang_status').append('language Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+        //---------------
+        //HOBBY BLOCK 
+        //---------------
+
+        $('#close_hobby').click(function (e) {
+            e.preventDefault()
+            $('.update_hobby_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('hobby ID is', id)
+
+
+            $('#hobby_id').val(id)
+
+            $('.update_hobby_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchhobby' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#hobby_name').val(data.hobby_name);
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_hobby').click(function (e) {
+            e.preventDefault()
+            let id = $('#hobby_id').val()
+
+            console.log('Save hobby ID is', id)
+
+            $('.update_hobby_info').show()
+            let hobby_name = $('#hobby_name').val()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', hobby_name: hobby_name }
+
+
+            $.ajax({
+                url: "{% url 'update_hobby' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_hobby_status').html('');
+                    $('.update_hobby_info').hide()
+                    $('#save_hobby_status').append('hobby Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('hobby ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_hobby' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_hobby_status').html('');
+                    $('#save_hobby_status').append('hobby Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+
+        //---------------
+        //LINKS BLOCK 
+        //---------------
+
+        $('#close_link').click(function (e) {
+            e.preventDefault()
+            $('.update_link_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('link ID is', id)
+
+
+            $('#link_id').val(id)
+
+            $('.update_link_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchlink' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#link_name').val(data.link_name);
+                    $('#link').val(data.link);
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_link').click(function (e) {
+            e.preventDefault()
+            let id = $('#link_id').val()
+
+            console.log('Save link ID is', id)
+
+            $('.update_link_info').show()
+            let link_name = $('#link_name').val()
+            let link = $('#link').val()
+
+
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', link_name: link_name, link: link }
+
+
+            $.ajax({
+                url: "{% url 'update_link' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_link_status').html('');
+                    $('.update_link_info').hide()
+                    $('#save_link_status').append('link Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('link ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_link' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_link_status').html('');
+                    $('#save_link_status').append('link Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+
+        //---------------
+        //SKILLS BLOCK 
+        //---------------
+
+        $('#close_skill').click(function (e) {
+            e.preventDefault()
+            $('.update_skill_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Skill ID is', id)
+
+
+            $('#skill_id').val(id)
+
+            $('.update_skill_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchskill' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#s_name').val(data.s_name);
+                    $('#s_level').val(data.s_level);
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_skill').click(function (e) {
+            e.preventDefault()
+            let id = $('#skill_id').val()
+
+            console.log('Save skill ID is', id)
+
+            $('.update_skill_info').show()
+            let s_name = $('#s_name').val()
+            let s_level = $('#s_level').val()
+
+
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', s_name: s_name, s_level: s_level }
+
+
+            $.ajax({
+                url: "{% url 'update_skill' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_skill_status').html('');
+                    $('.update_skill_info').hide()
+                    $('#save_skill_status').append('skill Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Skill ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_skill' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_skill_status').html('');
+                    $('#save_skill_status').append('skill Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+
+        //---------------
+        //academic block  
+        //--------------- 
+
+
+        $('#close_academic').click(function (e) {
+            e.preventDefault()
+            $('.update_academic_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Education ID is', id)
+
+
+            $('#academic_id').val(id)
+
+            $('.update_academic_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchacademic' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#institution').val(data.institution);
+                    $('#year').val(data.year);
+                    $('#award').val(data.award);
+                    $('#course').val(data.course);
+                    $('#mark').val(data.mark);
+
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_academic').click(function (e) {
+            e.preventDefault()
+            let id = $('#academic_id').val()
+
+            console.log('Save Education ID is', id)
+
+            $('.update_academic_info').show()
+            let institution = $('#institution').val()
+            let year = $('#year').val()
+            let award = $('#award').val()
+            let course = $('#course').val()
+            let mark = $('#mark').val()
+
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', institution: institution, year: year, award: award, course: course, mark: mark }
+
+
+            $.ajax({
+                url: "{% url 'update_academic' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_academic_status').html('');
+                    $('.update_academic_info').hide()
+                    $('#save_academic_status').append('Academic Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Education ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_academic' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_academic_status').html('');
+                    $('#save_academic_status').append('Academic Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+
+        //------------
+        //EXP BLOCK
+        //------------
+
+        $('#close_exp').click(function (e) {
+            e.preventDefault()
+            $('.update_exp_info').hide()
+        })
+
+
+        $('.btn-edit').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Experiance ID is', id)
+
+
+            $('#exp_id').val(id)
+
+            $('.update_exp_info').show()
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchexp' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#company').val(data.company);
+                    $('#role').val(data.role);
+                    $('#duration').val(data.duration);
+                    $('#city').val(data.city);
+                    $('#bio').val(data.bio);
+
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+
+        $('#save_exp').click(function (e) {
+            e.preventDefault()
+            let id = $('#exp_id').val()
+
+            console.log('Save Experiance ID is', id)
+
+            $('.update_exp_info').show()
+            let company = $('#company').val()
+            let role = $('#role').val()
+            let duration = $('#duration').val()
+            let city = $('#city').val()
+            let bio = $('#bio').val()
+
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}', company: company, role: role, duration: duration, city: city, bio: bio }
+
+
+            $.ajax({
+                url: "{% url 'update_exp' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_exp_status').html('');
+                    $('.update_exp_info').hide()
+                    $('#save_exp_status').append('Experiance Updated Successfully');
+
+
+                }
+            })
+
+
+
+        })
+
+
+
+
+        $('.btn-delete').click(function (e) {
+            e.preventDefault()
+            let id = $(this).attr("data-id");
+            console.log('Experiance ID is', id)
+
+
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'delete_exp' %}",
+                method: "POST",
+                data: data,
+
+                success: function () {
+                    $('#save_exp_status').html('');
+                    $('#save_exp_status').append('Experiance Deleted Successfully');
+                }
+            })
+
+
+
+        })
+
+        //---------------
+        //profile block  
+        //--------------- 
+
+
+        $('#del_btn').click(function (e) {
+            e.preventDefault()
+
+            let id = $('#cv_id').val()
+            console.log('CV Id is', id)
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+            $.ajax({
+                url: "{% url 'profile-delete' %}",
+                method: "POST",
+                data: data,
+
+
+                success: function () {
+                    $('#result_result').html('');
+                    $('#update_result').append('Profile Deleted Successfully');
+
+                }
+
+            })
+
+        })
+
+
+
+
+        $('#profile_close').click(function (e) {
+            e.preventDefault()
+
+            $('#fetch_profile').hide()
+        })
+
+        $('#profile_click').click(function (e) {
+            e.preventDefault()
+
+            $('#fetch_profile').show()
+
+            let id = $('#cv_id').val()
+            console.log('CV Id is', id)
+            data = { id: id, csrfmiddlewaretoken: '{{ csrf_token }}' }
+
+
+            $.ajax({
+                url: "{% url 'fetchprofile' %}",
+                method: "POST",
+                data: data,
+
+                success: function (data) {
+                    console.log(data);
+                    $('#fname').val(data.fname);
+                    $('#mname').val(data.mname);
+                    $('#lname').val(data.lname);
+                    $('#email').val(data.email);
+                    $('#country').val(data.country);
+                    $('#region').val(data.region);
+                    $('#bio').val(data.bio);
+                    $('#phone').val(data.phone);
+                    $('#dob').val(data.dob);
+                    $('#occupation').val(data.occupation);
+                    $('#city').val(data.city);
+
+
+
+
+
+
+
+                }
+            })
+        })
+
+
+
+        $('#profile_update').click(function (e) {
+            e.preventDefault();
+            console.log('Update button clicked')
+
+            let id = $('#cv_id').val()
+            var fname = $('.uform #fname').val();
+            var lname = $('.uform #lname').val();
+            var mname = $('.uform #mname').val();
+            var gender = $('.uform #gender').val();
+            var country = $('.uform #country').val();
+            var region = $('.uform #region').val();
+            var city = $('.uform #city').val();
+            var email = $('.uform #email').val();
+            var phone = $('.uform #phone').val();
+            var occupation = $('.uform #occupation').val();
+            var dob = $('.uform #dob').val();
+            var bio = $('.uform #bio').val();
+
+            var data = new FormData();
+            data.append('file', $("input[id^='file']")[0].files[0])
+            data.append('csrfmiddlewaretoken', "{{ csrf_token}}")
+            data.append('fname', fname);
+            data.append('lname', lname);
+            data.append('mname', mname);
+            data.append('gender', gender);
+            data.append('country', country);
+            data.append('region', region);
+            data.append('city', city);
+            data.append('email', email);
+            data.append('phone', phone);
+            data.append('occupation', occupation);
+            data.append('dob', dob);
+            data.append('bio', bio);
+            data.append('id', id);
+
+
+
+            $.ajax({
+                url: "{% url 'profile-update' %}",
+                method: "POST",
+                processData: false,
+                contentType: false,
+                mimeType: "multipart/form-data",
+                data: data,
+                dataType: 'json',
+
+                beforeSend: function () {
+                    $('#loading_spinner').show();
+                    $(":input").prop("disable", true);
+                },
+
+                complete: function () {
+                    $('#loading_spinner').hide();
+                    $(":input").prop("disable", false);
+                },
+
+                success: function (data) {
+                    $('.uform')[0].reset();
+                    $('#result_result').html('');
+                    $('#update_result').append('Profile Updated Successfully');
+                    $('#fetch_profile').hide()
+
+                }
+            })
+
+        })
+
+
+    })
+</script>

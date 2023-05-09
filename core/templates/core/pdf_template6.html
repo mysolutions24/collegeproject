@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+    <title>Resume Template</title>
+</head>
+<style>
+    /* Google Fonts  */
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+    /* font-family: 'Open Sans', sans-serif; */
+
+    @import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    /* font-family: 'Public Sans', sans-serif; */
+
+    @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+    /* font-family: 'Lato', sans-serif; */
+
+
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #EBECF0;
+        margin-top: 95px;
+        margin-bottom: 45px;
+        position: relative;
+
+    }
+
+    .main-section {
+        width: 250mm;
+        height: auto;
+        background-color: rgb(255, 255, 255);
+        margin: 0 auto;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .main-section .left-part {
+        width: auto;
+        height: auto;
+        background-color: #ff7b00;
+        padding: 2.8rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .left-part .photo-container {
+        margin-bottom: 1.2rem;
+        margin-top: auto;
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: 25px;
+    }
+
+    .left-part .photo-container img {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        border: 1rem solid white;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    .title {
+        font-family: 'Public Sans', sans-serif;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        padding: 0.6rem;
+        background-color: #ff7b00;
+        color: white;
+        text-align: center;
+        margin: 1.4rem 0;
+        margin-right: auto;
+    }
+
+    .contact-container {
+        margin-bottom: 1.2rem;
+    }
+
+    .contact-container .contact-list {
+        display: flex;
+        gap: 0.2rem;
+        margin-bottom: 0.3rem;
+        font-family: 'Lato', sans-serif;
+        color: #444440;
+        font-size: 1rem;
+    }
+
+    .education-container {
+        margin-bottom: 1rem;
+
+        font-family: 'Lato', sans-serif;
+    }
+
+    .education-container .course {
+        margin-bottom: 1rem;
+        color: #414042;
+    }
+
+    .education-container .education-title {
+        font-size: 1rem;
+        font-weight: 800;
+        margin-bottom: .3rem;
+    }
+
+    .education-container .college-name {
+        margin-bottom: 0.3rem;
+        font-weight: 600;
+
+    }
+
+    .education-container .education-date {
+        font-size: 0.9rem;
+    }
+
+    .skills-container .skill {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.6rem;
+        font-family: 'Lato', sans-serif;
+    }
+
+    .skills-container .skill .right-skill .outer-layer {
+        background-color: #BBBBBB;
+        height: 0.4rem;
+        width: 5rem;
+        border-radius: 0.4rem;
+    }
+
+    .skills-container .skill .right-skill .inner-layer {
+        background-color: #3D3D3D;
+        height: 100%;
+        border-radius: inherit;
+    }
+
+    .right-part {
+        padding: 2.8rem;
+    }
+
+    .right-part .banner {
+        font-family: 'Open Sans', sans-serif;
+        color: #4D4D4F;
+        margin-bottom: 1.2rem;
+    }
+
+    .right-part .banner .firstname {
+        font-size: 2.5rem;
+        margin-top: -1rem;
+    }
+
+    .right-part .banner .lastname {
+        font-size: 2.5rem;
+        font-weight: 400;
+        letter-spacing: 0.5rem;
+        margin-top: -2rem;
+    }
+
+    .right-part .banner .position {
+        letter-spacing: 0.3rem;
+        margin-top: -0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .work-container {
+        margin-top: 1rem;
+        font-family: 'Lato', sans-serif;
+
+    }
+
+    .work-container .work:not(:last-child) {
+        margin-bottom: 1.8rem;
+    }
+
+    .work-container .work .job-date {
+        display: flex;
+        justify-content: space-between;
+        color: #4D4D4F;
+        margin-bottom: 0.5rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+    }
+
+    .work-container .work .company-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        color: #4D4D4F;
+
+    }
+
+    .work-container .work .work-text {
+        color: #737373;
+        font-size: 0.8rem;
+        text-align: justify;
+        line-height: 1rem;
+    }
+
+    .references-container .references {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 1rem;
+        font-family: 'Lato', sans-serif;
+        color: #4D4D4F;
+    }
+
+    .references-container .references .name {
+        font-weight: 800;
+        font-size: 1.1rem;
+    }
+
+    .references-container .references .company-name {
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .references-container .references .phone {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.7rem;
+        color: #414042;
+    }
+
+    .references-container .references .phone p {
+        margin: 0.4rem 0;
+    }
+
+    .references-container .references .phone .phone-text {
+        font-weight: 600;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    button {
+        height: 40px;
+        width: 90px;
+        margin-left: 45%;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        box-shadow: 0 0 10px black;
+        cursor: pointer;
+        transition: .5s;
+        margin-top: 20px;
+        color: white;
+        background-color: blue;
+        border-radius: 10px;
+        box-shadow: 50px;
+    }
+
+    button:hover {
+        background-color: rgb(0, 44, 165);
+        box-shadow: 0 0 20px black;
+    }
+
+    @media print {
+        body * {
+            visibility: hidden;
+        }
+
+        .main-section * {
+            visibility: visible;
+        }
+
+
+    }
+
+</style>
+
+<body>
+
+    {% if user_profile %}
+    {% for profile in user_profile %}
+    <section class="main-section">
+        <div class="left-part">
+            <div class="photo-container">
+                {% if profile.avator %}
+                <img src="{{profile.avator.url}}" alt="profile image">
+                {% endif %}
+            </div>
+            <div class="contact-container">
+                <h2 class="title">Contact</h2>
+                <div class="contact-list">
+                    <div class="icon-container">
+                        <i class="bi bi-phone"></i>
+                    </div>
+                    <div class="contact-text">
+                        <p> +91 {{profile.phone}}</p>
+                    </div>
+                </div>
+                <div class="contact-list">
+                    <div class="icon-container">
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+                    <div class="contact-text">
+                        <p>{{ profile.email}}</p>
+                    </div>
+                </div>
+
+                <div class="contact-list">
+                    <div class="icon-container">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <div class="contact-text">
+                        <p>{{ profile.city }},
+                            {{ profile.region }}, {{ profile.country }}.</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+
+                <div class="contact-list">
+
+
+                    <div class="icon-container">
+                        <div class="contact-text">
+                            {% if user_link %}
+                            {% for link in user_link %}
+                            <!-- <i class="bi bi-link"></i> -->
+                            <h4><b>{{ link.link_name }}</b></h4>
+                            <p>{{ link.link }}</p>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="skills-container">
+                <h2 class="title">Skills</h2>
+
+                <div class="skill">
+                    {% if user_skill %}
+                    <div class="left-skill">
+                        {% for skill in user_skill %}
+
+                        <h4>
+                            <li>{{ skill.s_name }}</li>
+                        </h4>
+                        <p style="margin-left: 23px;">Level : {{ skill.s_level }}</p>
+                        {% endfor %}
+
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <div class="skills-container">
+                <h2 class="title">Languages</h2>
+
+                <div class="skill">
+                    {% if user_lang %}
+                    <div class="left-skill">
+                        {% for lang in user_lang %}
+
+                        <h4>
+                            <li>{{ lang.lang_name }}</li>
+                        </h4>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+
+            </div>
+
+            <div class="references-container">
+                <h2 class="title text-left">References</h2>
+                <div class="references">
+                    {% if user_referee %}
+                    <div class="left-references">
+                        {% for ref in user_referee %}
+                        <h4 class="name">{{ ref.r_name }}</h4>
+                        <p>Phone: {{ ref.r_phone }}</p>
+                        <p>Email: {{ ref.r_email }}</p><br>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+        {% if user_profile %}
+        {% for profile in user_profile %}
+        <div class="right-part">
+            <div class="banner">
+                <h1 class="firstname">{{ profile.fname}} {{ profile.mname}} {{ profile.lname}}</h1>
+                <p class="position">{{ profile.occupation }}</p>
+            </div>
+
+
+            <div class="work-container ">
+                <h2 class="title text-left">Objective</h2>
+                <div class="work">
+                    <h2 class="company-name">{{ profile.bio }}</h2>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+            </div>
+
+            <div class="work-container ">
+                {% if user_exp %}
+                <h2 class="title text-left">work experience</h2>
+                <div class="work">
+                    {% for exp in user_exp %}
+
+                    <div class="job-date">
+                        <p class="job">{{exp.e_role }}</p>
+                        <p class="date">{{exp.e_duration }}</p>
+                    </div>
+                    <h2 class="company-name">{{ exp.e_company }}</h2>
+                    <p class="work-text">{{ exp.e_bio }}</p><br>
+                    {% endfor %}
+
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="education-container">
+                {% if user_education %}
+                <h2 class="title text-left ">Education</h2>
+                <div class="course">
+                    {% for edu in user_education %}
+
+                    <h2 class="education-title">{{ edu.a_course }} - {{edu.a_mark}}</h2>
+                    <h5 class="college-name">{{ edu.a_institution }}</h5>
+                    <p class="education-date">Academic Year : {{ edu.a_year }}</p>
+                    <p class="education-date">{{ edu.a_award }}</p><br>
+                    {% endfor %}
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            <div class="references-container">
+                <h2 class="title text-left">Curricular Activites</h2>
+                <div class="references">
+                    {% if user_eca %}
+
+                    <div class="left-references">
+                        {% for eca in user_eca %}
+                        <h4 class="name">{{ eca.eca_name }}</h4>
+                        <p class="company-name">{{ eca.eca_des }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <button>DOWNLOAD</button>
+
+    <script>
+        var btn = document.querySelector("button");
+        btn.onclick = () => {
+            window.print();
+        }
+
+    </script>
+
+</body>
+
+</html>

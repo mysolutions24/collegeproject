@@ -1,0 +1,384 @@
+{% include 'core/navbar.html' %}
+{% load static %}
+<style>
+    body {
+        /* background-color: #212529; */
+        background-color: red; background-image: linear-gradient(0deg, rgb(136, 14, 0), rgb(184, 0, 89));
+
+    }
+
+    /* Styling the Form (Color, Padding, Shadow) */
+    form {
+        background-color: #fff;
+        max-width: 100%;
+        margin: 50px auto;
+        padding: 30px 20px;
+        box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    label {
+        color: rgb(194, 82, 255);
+    }
+</style>
+<div id="content-wrapper" class="mt-4" style="padding-top: 5%;">
+    <div class="container-fluid">
+        <div class="mb-2 col-md-12">
+
+            <div class="row">
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-8">
+                    <br />
+
+                    {% if status == 'no_profile' %}
+                    <p style="color:#ebff6c">After Submitting a Personal Details, You Can Start Filling Other details,
+                        Like Experiance, Education, Skills, Languages etc</p>
+                    <h1 style="color:#ffffff">Add Personal Details</h1>
+                    <form class="uform" id="form" method="POST" enctype="multipart/form-data">
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label>First Name</label>
+                                    <input type="text" placeholder="Enter First Name" id="fname" 
+                                    class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Middle Name</label>
+                                    <input type="text" placeholder="Enter Middle Name" id="mname"
+                                        class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Last name</label>
+                                    <input type="text" placeholder="Enter Last Name" id="lname" 
+                                    class="form-control" />
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Gender</label>
+                                    <select id="gender" class="form-control">
+                                        <option value="">Choose Your Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label>Date of Birth</label>
+                                    <input type="date" placeholder="Enter Date of Birth" id="dob"
+                                        class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Wanted Job Title</label>
+                                    <input type="text" placeholder="Ex: Software Developer" id="occupation"
+                                        class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Email Id</label>
+                                    <input type="email" placeholder="Ex: abc@example.com" id="email"
+                                        class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Mobile Number</label>
+                                    <input type="text" placeholder="Ex: +91 12345 12345" id="phone"
+                                        class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Country</label>
+                                    <input type="text" placeholder="Country Name" id="country" 
+                                    class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>State</label>
+                                    <input type="text" placeholder="State Name" id="region" 
+                                    class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label>Full Address</label>
+                                    <input type="text" placeholder="Enter Your Current Address" id="city" 
+                                    class="form-control" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+                                <!-- <div class="col">
+                                    <label>Pin Code</label>
+                                    <input type="text" placeholder="Enter Zip Code" id="pincode" 
+                                    class="form-control" />
+                                </div> -->
+
+                                <div class="col">
+                                    <label>Profile Photo</label>
+                                    <input type="file" id="file" class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <label>Professional Summary</label>
+                            <textarea id="bio"
+                                placeholder="Highly skilled and experienced Translator with a strong background in translating Legal Documents in English."
+                                cols="4" rows="5" class="form-control"></textarea>
+
+                        </div>
+                        <img src="{% static 'img/spinner.gif' %}"
+                            style="width: 10%; margin-left: 340px; padding-top: 0%; display: none;"
+                            id="loading_spinner">
+                        <div id="result"></div>
+                        <br />
+
+                        <button id="profile_save" class="btn btn-primary" style="margin-left: 340px;">Save</button>
+
+                    </form>
+
+                    {% else %}
+
+
+
+                    <br />
+
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Experiance</h1>
+                    <form class="form_exp" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_exp"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="exp_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="exp_add" class="btn btn-success">Add More</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <br />
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Education</h1>
+                    <form class="form_edu" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_edu"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="edu_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="edu_add" class="btn btn-success">Add More</button>
+                            </div>
+
+                        </div>
+                    </form>
+                    <br />
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Skills</h1>
+
+                    <form class="form_skill" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_skill">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        <label>Name of your skill</label>
+                                        <input type="Enter Your Skill" id="s_name" name="s_name" class="form-control" />
+                                    </div>
+                                    <div class="col">
+                                        <label>Level of your skill</label>
+                                        <select name="s_level" id="s_level" class="form-control">
+                                            <option value="">Choose Your Level</option>
+                                            <option value="Beginner">Beginner</option>
+                                            <option value="Intermediate">Intermediate</option>
+                                            <option value="Advanced">Advanced</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="skill_del_btn col" style="padding-top: 30px;">
+                                        <button id="skill_add" class="btn btn-success">Add More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="skill_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+
+                    <br />
+
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Websites & Social Links
+                    </h1>
+
+                    <form class="form_link" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_link"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="link_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="link_add" class="btn btn-success">Add</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <br />
+
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Hobbies</h1>
+
+                    <form class="form_hobby" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_hobby"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="hobby_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="hobby_add" class="btn btn-success">Add</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <br />
+
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Languages</h1>
+
+                    <form class="form_lang" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_lang"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="lang_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="lang_add" class="btn btn-success">Add</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+                    <br />
+
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add Extra-Curricular Activities
+                    </h1>
+
+                    <form class="form_eca" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_eca"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="eca_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="eca_add" class="btn btn-success">Add</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+
+                    <br />
+                    <h1 class="card" style="color: #fff; background-color: transparent;">Add References</h1>
+
+                    <form class="form_ref" method="POST">
+                        {% csrf_token %}
+                        <div id="wrapper_ref"></div>
+
+                        <br />
+                        <div class="row">
+                            <div class="col-md-1">
+                                <button id="ref_save" class="btn btn-primary">Save</button>
+                            </div>
+
+                            <div class="col-md-1">
+                                <button id="ref_add" class="btn btn-success">Add</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <div class="col-md-2">
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+</div>
+</div>
+
+{% include 'core/create_cv_script.html' %}

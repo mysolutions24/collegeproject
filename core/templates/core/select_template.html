@@ -1,0 +1,81 @@
+{% include 'core/navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+<h2 style="margin-top: 100px; color: rgb(255, 255, 255); text-align: center;">Select Your Template</h2>
+<br>
+<div class="row" >
+  <div class="column" style="margin-left: 150px; padding-bottom: 5%;">
+    <div class="card">
+      <img src="https://i.postimg.cc/XN2BbsYs/TEMP-2.png" alt="Templates" style="width: 300px;; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail1'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-left: 90px; padding-bottom: 10px;">
+    <div class="card">
+      <img src="https://i.postimg.cc/3x1PS0B0/TEMP-1.png" alt="Templates" style="width:300px; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail2'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-left: 90px; padding-bottom: 10px;">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/TEMP-3.png" alt="Templates" style="width:300px; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail3'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-left: 150px; padding-bottom: 5%;">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/TEMP-4.png" alt="Templates" style="width: 300px;; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail4'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>  
+
+  <div class="column" style="margin-left: 90px; padding-bottom: 10px;">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/TEMP-5.png" alt="Templates" style="width:300px; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail5'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="column" style="margin-left: 90px; padding-bottom: 10px;">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/TEMP6.png" alt="Templates" style="width:300px; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail6'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column" style="margin-left: 150px; padding-bottom: 5%;">
+    <div class="card">
+      <img src="https://www.linkpicture.com/q/TEMP-4.png" alt="Templates" style="width: 300px;; height:410PX;">
+      <div class="container">
+        <a href="{% url 'cv-detail7'  id=request.user.cv.id %}"><button class="loginbtn" style="margin-bottom: 30px;">use this</button></a>
+      </div>
+    </div>
+  </div>  
+
+  
+</div>
+
+</body>
+</html>

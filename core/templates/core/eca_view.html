@@ -1,0 +1,108 @@
+{% include 'core/navbar.html' %}
+{% load static %}
+
+<div style="padding-top: 10%; margin-left: 10%; margin-right: 10%;">
+    <div>
+        <div>
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr style="color: white;">
+                            <th>Title</th>
+                            <th>Description </th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody style="color: white;">
+                        <input type="hidden" value={{request.user.cv.id}} id="cv_id">
+
+                        {% if user_eca %}
+                        {% for e in user_eca %}
+
+                        <tr>
+
+
+                            <td>
+                                {{ e.eca_name }}
+                            </td>
+
+                            <td>
+                                {{ e.eca_des }}
+                            </td>
+
+                            <td>
+                                <input class="btn btn-primary btn-sm btn-edit" style="width: 70px;" data-id="{{e.id}}"
+                                    value="Edit" type="button">
+                            </td>
+
+                            <td>
+                                <input class="btn btn-danger btn-sm btn-delete" style="width: 70px;" data-id="{{e.id}}"
+                                    value="Delete" type="button">
+                            </td>
+                        </tr>
+
+
+                        {% endfor %}
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <div id="save_eca_status"></div>
+
+
+
+            <br />
+            <br />
+
+
+
+            <div class="update_eca_info" style="display: none;">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead style="color: white;">
+                            <tr>
+                                <th>Title</th>
+                                <th>Description</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                            <input type="hidden" id="eca_id">
+
+
+                            <tr>
+
+                                <td>
+                                    <input type="text" id="eca_name" class="form-control" />
+                                </td>
+
+                                <td>
+                                    <input type="text" id="eca_des" class="form-control" />
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <button class="btn btn-success" id="save_eca">Update</button>
+
+                    <button class="btn btn-info" id="close_eca">Close</button>
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    {% include 'core/edit_cv_script.html' %}

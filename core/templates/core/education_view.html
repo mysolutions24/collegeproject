@@ -1,0 +1,133 @@
+{% include 'core/navbar.html' %}
+{% load static %}
+
+<div style="padding-top: 10%; margin-left: 10%; margin-right: 10%;">
+     <div>
+       <div>
+           
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr style="color: white;">
+                        <th>Institution</th>
+                        <th>Year</th>
+                        <th>Award</th>
+                        <th>Course</th>
+                        <th>Percentage</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody style="color: white;">
+                    <input type="hidden" value={{request.user.cv.id}} id="cv_id">
+
+                    {% if user_education %}
+                    {% for educa in user_education %}
+
+                    <tr>
+                        
+            
+                        <td>
+                           {{ educa.a_institution }}
+                        </td>
+
+                        <td>
+                            {{ educa.a_year }}
+                         </td>
+
+                         <td>
+                            {{ educa.a_award }}
+                         </td>
+                         <td>
+                            {{ educa.a_course }}
+                         </td>
+                         <td>
+                            {{ educa.a_mark }}
+                         </td>
+
+                         <td>
+
+                            
+                             <input class="btn btn-primary btn-sm btn-edit" style="width: 70px;" data-id="{{educa.id}}" value="Edit" type="button"> 
+                        </td>
+
+                        <td>
+                            <input class="btn btn-danger btn-sm btn-delete" style="width: 70px;" data-id="{{educa.id}}" value="Delete" type="button"> 
+                        </td>
+                    </tr>
+
+
+                    {% endfor %}
+                    {% endif %}
+                    
+                </tbody>
+
+            </table>
+        
+       </div>
+
+       <div id="save_academic_status"></div>
+
+
+
+       <br/>
+       <br/>
+
+
+
+       <div class="update_academic_info" style="display: none;">
+       <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead style="color: white;">
+                <tr>
+                    <th>Institution</th>
+                    <th>Year</th>
+                    <th>Award</th>
+                    <th>Course</th>
+                    <th>Percentage</th>
+
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <input type="hidden"  id="academic_id">
+
+
+                <tr>
+        
+                    <td>
+                       <input type="text"  id="institution" class="form-control"/>
+                    </td>
+
+                    <td>
+                        <input type="text"  id="year" class="form-control"/>
+                     </td>
+
+                     <td>
+                        <input type="text"  id="award" class="form-control"/>
+                     </td>
+                     <td>
+                        <input type="text"  id="course" class="form-control"/>
+                     </td><td>
+                        <input type="text"  id="mark" class="form-control"/>
+                     </td>
+                </tr>
+                
+            </tbody>
+
+        </table>
+
+        <button class="btn btn-success" id="save_academic">Update</button>
+
+        <button class="btn btn-info" id="close_academic">Close</button>
+
+    
+   </div>
+</div>
+
+
+
+     </div>
+</div>
+
+
+{% include 'core/edit_cv_script.html' %}
