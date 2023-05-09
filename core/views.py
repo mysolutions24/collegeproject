@@ -18,6 +18,7 @@ from core import models
 from .process import html_to_pdf 
 from django.template.loader import render_to_string
 
+print("hiii")
 
 def index(request):
     return render(request, 'core/home.html')
