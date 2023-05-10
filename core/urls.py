@@ -18,7 +18,6 @@ urlpatterns = [
     path('cv-detail4/<id>', views.viewPDF4, name="cv-detail4"),
     path('cv-detail5/<id>', views.viewPDF5, name="cv-detail5"),
     path('cv-detail6/<id>', views.viewPDF6, name="cv-detail6"),
-    path('cv-detail7/<id>', views.viewPDF7, name="cv-detail7"),
     path('s-t/<id>', views.selectPDF, name="s-t"),
     path('cv-edit/', views.editCv, name="cv-edit"),
     path('cv-download/<id>', views.GeneratePdf.as_view(),name="cv-download"), 

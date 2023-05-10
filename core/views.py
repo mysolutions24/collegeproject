@@ -943,29 +943,6 @@ def viewPDF6(request, id=None):
     return render(request, 'core/pdf_template6.html', context)
 
 
-
-def viewPDF7(request, id=None):
-    user_profile = Profile.objects.filter(cv_id=id)
-    user_skill = Skill.objects.filter(cv_id=id).values()
-    user_referee = Referee.objects.filter(cv_id=id).values()
-    user_education = Academic.objects.filter(cv_id=id).values()
-    user_exp = Experiance.objects.filter(cv_id=id).values()
-    user_link = Links.objects.filter(cv_id=id).values()
-    user_hobby = Hobbies.objects.filter(cv_id=id).values()
-    user_lang = Language.objects.filter(cv_id=id).values()
-    user_eca = ECA.objects.filter(cv_id=id).values()
-
-
-    context = {'user_profile': user_profile, 'user_skill': user_skill,
-               'user_referee': user_referee, 'user_education': user_education,
-               'user_exp':user_exp,'user_link':user_link,'user_hobby':user_hobby,'user_lang':user_lang,
-               'user_eca':user_eca}
-    
-    return render(request, 'core/pdf_template7.html', context)
-
-
-
-
 def selectPDF(request,id=None):
     return render(request,'core/select_template.html')
 
